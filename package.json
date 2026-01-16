@@ -1,0 +1,16 @@
+{
+  "name": "minidb",
+  "version": "1.0.0",
+  "description": "A simple database language interpreter",
+  "main": "minidb.js",
+  "bin": {
+    "minidb": "./minidb.js"
+  },
+  "scripts": {
+    "test": "node test-minidb.js",
+    "start": "node minidb.js"
+  },
+  "keywords": ["database", "interpreter", "minidb"],
+  "author": "Your Name",
+  "license": "MIT"
+}
