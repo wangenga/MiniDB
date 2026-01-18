@@ -71,8 +71,21 @@ class MiniDB {
       value = parseFloat(value);
     }
 
-    this.database[key] = value;
-    return `Stored: ${key} = ${value}`;
+    if (key in this.database) {
+      // Key exists - append to list
+      if (Array.isArray(this.database[key])) {
+        // Already a list, append to it
+        this.database[key].push(value);
+      } else {
+        // Convert existing value to list and append new value
+        this.database[key] = [this.database[key], value];
+      }
+      return `Appended to ${key}: ${JSON.stringify(this.database[key])}`;
+    } else {
+      // New key - store as single value
+      this.database[key] = value;
+      return `Stored: ${key} = ${value}`;
+    }
   }
 
   // Handle GET command

@@ -39,14 +39,18 @@ Type "exit" to quit, "show" to display all data
 
 MiniDB> STORE name "John Doe"
 Stored: name = John Doe
+MiniDB> STORE name "Jane Smith"
+Appended to name: ["John Doe","Jane Smith"]
 MiniDB> STORE age 25
 Stored: age = 25
+MiniDB> STORE age 30
+Appended to age: [25,30]
 MiniDB> GET name
-John Doe
+[ 'John Doe', 'Jane Smith' ]
 MiniDB> GET age
-25
+[ 25, 30 ]
 MiniDB> show
-Database contents: { name: 'John Doe', age: 25 }
+Database contents: { name: [ 'John Doe', 'Jane Smith' ], age: [ 25, 30 ] }
 MiniDB> exit
 Goodbye!
 ```
@@ -75,15 +79,17 @@ console.log(result); // "Alice"
 ## Commands
 
 ### STORE
-Store a key-value pair in the database.
+Store a key-value pair in the database. If the key already exists, the new value is appended to a list instead of overwriting.
 
 **Syntax:** `STORE [key] [value]`
 
 **Examples:**
 ```
-STORE name "John Doe"     # String value
-STORE age 25              # Number value
-STORE active true         # Identifier value
+STORE name "John Doe"     # First value: "John Doe"
+STORE name "Jane Smith"   # Creates list: ["John Doe", "Jane Smith"]
+STORE name "Bob Wilson"   # Appends to list: ["John Doe", "Jane Smith", "Bob Wilson"]
+STORE age 25              # First value: 25
+STORE age 30              # Creates list: [25, 30]
 ```
 
 ### GET

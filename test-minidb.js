@@ -13,6 +13,11 @@ try {
   console.log(db.execute('STORE city "New York"'));
   console.log(db.execute('STORE score 95.5'));
   
+  console.log('\nTesting duplicate key behavior (append to list):');
+  console.log(db.execute('STORE name "Jane Smith"'));  // Should append
+  console.log(db.execute('STORE age 30'));             // Should append
+  console.log(db.execute('STORE name "Bob Wilson"'));  // Should append again
+  
   console.log('\nTesting GET commands:');
   console.log('name:', db.execute('GET name'));
   console.log('age:', db.execute('GET age'));
